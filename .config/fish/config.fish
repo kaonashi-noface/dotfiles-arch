@@ -23,6 +23,7 @@ command -v zoxide &> /dev/null && zoxide init fish --cmd cd | source
 
 # Better ls
 alias ls='eza --icons --group-directories-first -1'
+bind ctrl-c cancel-commandline
 
 # Abbrs
 abbr lg 'lazygit'
@@ -90,7 +91,6 @@ alias mkdir="mkdir -p"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias code="code --force-device-scale-factor=1.25"
-
 
 
 

@@ -1,0 +1,9 @@
+{
+    // opencode session list
+    // opencode session delete <session-id>
+    "$schema": "https://opencode.ai/config.json",
+    // opencode models
+    "model": "opencode/big-pickle",
+    "default_agent": "plan",
+    "autoupdate": true
+}

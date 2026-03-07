@@ -7,6 +7,8 @@ pacman -S --needed base-devel linux-headers linux-lts-headers \
     rustup nvm lua git github-cli opencode cava \
     ttf-meslo-nerd ttf-firacode-nerd
 
+chsh -s /usr/bin/fish
+
 # Install the lasest stable version of Rust
 rustup default stable
 # Install the latest stable version of NodeJS

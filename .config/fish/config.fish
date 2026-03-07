@@ -3,6 +3,15 @@ if not status is-interactive
     return
 end
 
+##############################
+# PATH Configurations
+##############################
+export UID=1000
+export XDG_RUNTIME_DIR="/run/user/$UID"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+export XDG_SESSION_TYPE="wayland"
+export XDG_CONFIG_HOME="$HOME/.config"
+
 
 
 # Starship custom prompt
@@ -45,6 +54,26 @@ cat ~/.local/state/caelestia/sequences.txt 2> /dev/null
 function mark_prompt_start --on-event fish_prompt
     echo -en "\e]133;A\e\\"
 end
+
+
+
+# Setup Yazi Wrapper
+function y
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    command yazi $argv --cwd-file="$tmp"
+    if read -z cwd < "$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
+end
+
+
+########################################
+# Runtime Environment Configurations
+########################################
+# Set your default version
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+_fnm_autoload_hook
 
 
 

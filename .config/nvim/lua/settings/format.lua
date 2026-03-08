@@ -4,3 +4,6 @@ vim.opt.expandtab = true   -- Insert " " instead of tab characters
 vim.opt.softtabstop = 4    -- # of " " inserted/deleted with <Tab> and <BS>
 vim.opt.number = true
 
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
+

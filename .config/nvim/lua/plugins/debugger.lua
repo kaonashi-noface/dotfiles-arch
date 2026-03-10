@@ -10,7 +10,8 @@ return {
     opts = {},
     config = function()
         local dap = require("dap")
-        local dapui = require("dapui").setup()
+        local dapui = require("dapui")
+        dapui.setup()
         require("mason").setup()
         
         dap.listeners.before.attach.dapui_config = function()

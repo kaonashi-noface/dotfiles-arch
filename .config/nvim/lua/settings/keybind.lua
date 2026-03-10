@@ -2,10 +2,12 @@
 vim.keymap.set("i", "<S-Tab>", "<C-d>")
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 
+local dapui = require("dapui")
+vim.keymap.set("n", "<space>dui", dapui.toggle)
+
 local dap = require("dap")
 vim.keymap.set("n", "<space>b",  dap.toggle_breakpoint)
 
--- vim.keymap.set("n", "<space>b",  dap.run)
 vim.keymap.set("n", "<space>d<Right>",  dap.step_over)
 vim.keymap.set("n", "<space>d<Down>",  dap.step_into)
 vim.keymap.set("n", "<space>d<Up>",  dap.step_out)

@@ -6,17 +6,15 @@ return {
                 return
             end
 
-            local node_exe = vim.fn.expand("$MASON/bin/js-debug-adapter")
-            --local dapAdapterPkgPath = vim.fn.expand("$MASON/packages/js-debug-adapter")
-            --local jsDapServerPath = dapAdapterPkgPath .. "/js-debug/src/dapDebugServer.js"
+            local dapAdapterPkgPath = vim.fn.expand("$MASON/packages/js-debug-adapter")
+            local jsDapServerPath = dapAdapterPkgPath .. "/js-debug/src/dapDebugServer.js"
             dap.adapters["pwa-node"] = {
                 type = "server",
                 host = "localhost",
                 port = "${port}",
                 executable = {
-                    command = node_exe,
-                    --command = "node",
-                    args = { "${port}"},
+                    command = "node",
+                    args = { jsDapServerPath, "${port}" },
                 }
             }
 
@@ -26,8 +24,9 @@ return {
                         name = "Debug Current File",
                         type = "pwa-node",
                         request = "launch",
-                        cwd = vim.fn.getcwd(), -- ${workspaceFolder}
+                        cwd = "${workspaceFolder}",
                         program = "${file}",
+                        stopOnEntry = true,
                         outputCapture = "std",
                         resolveSourceMapLocations = {
                             "${workspaceFolder}/**",

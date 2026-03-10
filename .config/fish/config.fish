@@ -3,26 +3,37 @@ if not status is-interactive
     return
 end
 
-##############################
-# PATH Configurations
-##############################
+########################################
+# User Session Configurations
+########################################
 export UID=1000
 export XDG_RUNTIME_DIR="/run/user/$UID"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 export XDG_SESSION_TYPE="wayland"
+
+########################################
+# PATH Configurations
+########################################
 export XDG_CONFIG_HOME="$HOME/.config"
-
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
-
-
 
 # Starship custom prompt
 starship init fish | source
 
+########################################
+# FISH Configurations
+########################################
 # Direnv + Zoxide
 command -v direnv &> /dev/null && direnv hook fish | source
 command -v zoxide &> /dev/null && zoxide init fish --cmd cd | source
 
+bind ctrl-c cancel-commandline
+
+
+########################################
+# CUSTOM ALIASES
+########################################
+# Setup directory navigation aliases
 # Better ls
 alias ls='eza --icons --group-directories-first -1'
 
@@ -44,10 +55,19 @@ abbr gbd 'git branch -d'
 abbr gco 'git checkout'
 abbr gsh 'git show'
 
-abbr l 'ls'
-abbr ll 'ls -l'
-abbr la 'ls -a'
-abbr lla 'ls -la'
+abbr l 'ls  --color=auto'
+abbr ll 'ls -l  --color=auto'
+abbr la 'ls -a  --color=auto'
+abbr lla 'ls -la  --color=auto'
+
+abbr .. "cd .."
+abbr .2 "cd ../.."
+abbr .3 "cd ../../.."
+abbr .4 "cd ../../../.."
+abbr .5 "cd ../../../../.."
+abbr mkdir "mkdir -p"
+abbr grep "grep --color=auto"
+abbr code "vscodium"
 
 # Custom colours
 cat ~/.local/state/caelestia/sequences.txt 2> /dev/null
@@ -70,30 +90,12 @@ function y
 end
 
 
+
 ########################################
 # Runtime Environment Configurations
 ########################################
-# Set your default version
+# Automatice NodeJS Version Detection
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 _fnm_autoload_hook
-
-
-
-########################################
-# CUSTOM ALIASES
-########################################
-# Setup directory navigation aliases
-alias ..="cd .."
-alias .2="cd ../.."
-alias .3="cd ../../.."
-alias .4="cd ../../../.."
-alias .5="cd ../../../../.."
-alias mkdir="mkdir -p"
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias code="code --force-device-scale-factor=1.25"
-
-bind ctrl-c cancel-commandline
-
 
 

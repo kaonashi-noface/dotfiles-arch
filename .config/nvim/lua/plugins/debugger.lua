@@ -30,6 +30,7 @@ return {
         require("nvim-dap-virtual-text").setup()
 
         local registry = require("mason-registry")
+        -- Load DAP servers for Languages:
         require("configs.dap.node").setup(dap, registry)
 
     end

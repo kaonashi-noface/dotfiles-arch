@@ -12,6 +12,8 @@ chsh -s /usr/bin/fish
 # TODO: automate copying .config
 
 # Install the latest stable versions:
+rustup install stable
+rustup default stable
 mise install
 
 # TODO: add proper pushd steps
